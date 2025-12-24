@@ -1,0 +1,20 @@
+{
+  "name": "interviewplatform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "build": "npm install --prefix backend && npm install --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronronrivera/Interview-Platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronronrivera/Interview-Platform/issues"
+  },
+  "homepage": "https://github.com/ronronrivera/Interview-Platform#readme"
+}
