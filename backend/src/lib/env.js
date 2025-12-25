@@ -3,4 +3,10 @@ import "dotenv/config"
 export const ENV={
     PORT: process.env.PORT,
     DB_URL: process.env.DB_URL,
+    INNGEST_EVENT_KEY: process.INNGEST_EVENT_KEY,
+    INNGEST_SIGNING_KEY: process.INNGEST_SIGNING_KEY,
+    STREAM_API_KEY: process.env.STREAM_API_KEY,
+    STREAM_API_SECRET: process.env.STREAM_API_SECRET,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY
 }

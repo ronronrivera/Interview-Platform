@@ -1,13 +1,19 @@
 import express from "express";
+import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
 
 const app = express();
 
-app.get("/test", (req, res) =>{
-    res.status(200).json({message: "Success!!!!!"});
-})
+const startServer = async () =>{
+    try {
+        console.log("\n\n") 
+        await connectDB();
+        app.listen(ENV.PORT, () =>{
+            console.log(`Server is running on PORT: ${ENV.PORT}\n\n`);
+        })
+    } catch (error) {
+        console.log("💣 Error connecting to the server: ", error);
+    }
+}
 
-
-app.listen(ENV.PORT, () =>{
-    console.log(`App is listening on port ${ENV.PORT}`);
-})
+startServer();
