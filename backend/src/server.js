@@ -1,8 +1,25 @@
 import express from "express";
+import cors from "cors"
+import { serve } from "inngest/express";
+
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
+import { inngest } from "./lib/inngest.js";
 
 const app = express();
+
+app.use("/api/inngest", serve({client:inngest, functions}));
+
+//middleware
+if(!ENV.FRONT_END_URL){
+    console.log("❌ FRONT_END_URL is not defined in environment variables")
+    process.exit(1) //failure
+}
+app.use(express.json());
+app.use(cors({
+    origin: ENV.FRONT_END_URL,
+    credentials: true
+}));
 
 const startServer = async () =>{
     try {
