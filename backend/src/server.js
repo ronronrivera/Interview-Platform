@@ -6,6 +6,9 @@ const app = express();
 
 const startServer = async () =>{
     try {
+        if(!ENV.DB_URL){
+            throw new Error("DB_URL is not defined in environment variables")
+        }
         console.log("\n\n") 
         await connectDB();
         app.listen(ENV.PORT, () =>{
