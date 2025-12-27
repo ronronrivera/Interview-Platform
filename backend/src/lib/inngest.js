@@ -8,19 +8,28 @@ const syncUser = inngest.createFunction(
     {id: "sync-user"},
     {event: "clerk/user.created"},
     async ({event}) =>{
-        await connectDB();
+        try {
+            console.log("📥 syncUser event:", JSON.stringify(event, null, 2));
+            await connectDB();
 
-        const {id, email_addresses, first_name, last_name, image_url} = event.data
+            const {id, email_addresses, first_name, last_name, image_url} = event.data || {};
 
-        const newUser = {
-            clerkId: id,
-            email: email_addresses[0]?.email_adress,
-            name: `${first_name || ""} ${last_name || ""}`, 
-            profileImage: image_url
+            const email = email_addresses?.[0]?.email_address || null;
+            const name = `${first_name || ""} ${last_name || ""}`.trim() || "Unknown";
+
+            const newUser = {
+                clerkId: id,
+                email,
+                name,
+                profileImage: image_url
+            }
+
+            const created = await User.create(newUser);
+            console.log("✅ User created:", created._id);
+        } catch (err) {
+            console.error("❌ syncUser error:", err);
+            throw err; // rethrow so Inngest registers the failure and you can see it in logs
         }
-        await User.create(newUser);
-        
-        //todo: sth
     }
 )
 
@@ -28,13 +37,18 @@ const deleteUserFromDB = inngest.createFunction(
     {id: "delete-user-from-db"},
     {event: "clerk/user.deleted"},
     async ({event}) =>{
-        await connectDB();
+        try {
+            console.log("📤 deleteUserFromDB event:", JSON.stringify(event, null, 2));
+            await connectDB();
 
-        const {id} = event.data
+            const {id} = event.data || {};
 
-        await User.deleteOne({clerkId: id});
-
-        //todo: sth
+            const res = await User.deleteOne({clerkId: id});
+            console.log("✅ deleteUserFromDB result:", res);
+        } catch (err) {
+            console.error("❌ deleteUserFromDB error:", err);
+            throw err;
+        }
     }
 )
 

@@ -8,7 +8,6 @@ import { inngest, functions } from "./lib/inngest.js";
 
 const app = express();
 
-app.use("/api/inngest", serve({client:inngest, functions}));
 
 //middleware
 if(!ENV.FRONT_END_URL){
@@ -21,19 +20,28 @@ app.use(cors({
     credentials: true
 }));
 
-const startServer = async () =>{
-    try {
-        if(!ENV.DB_URL){
-            throw new Error("DB_URL is not defined in environment variables")
+app.use("/api/inngest", serve({client:inngest, functions}));
+
+if(!process.env.VERCEL){
+
+    const startServer = async () =>{
+        try {
+            if(!ENV.DB_URL){
+                throw new Error("DB_URL is not defined in environment variables")
+            }
+            console.log("\n\n") 
+            await connectDB();
+            app.listen(ENV.PORT, () =>{
+                console.log(`Server is running on PORT: ${ENV.PORT}\n\n`);
+            })
+        } catch (error) {
+            console.log("💣 Error connecting to the server: ", error);
         }
-        console.log("\n\n") 
-        await connectDB();
-        app.listen(ENV.PORT, () =>{
-            console.log(`Server is running on PORT: ${ENV.PORT}\n\n`);
-        })
-    } catch (error) {
-        console.log("💣 Error connecting to the server: ", error);
     }
+
+    startServer();
+
+
 }
 
-startServer();
+export default app;
