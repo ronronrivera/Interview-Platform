@@ -1,6 +1,7 @@
 import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
 import User from "../models/user.model.js";
+import { deleteStreamUser, upsertStreamUser } from "./stream.js";
 
 export const inngest = new Inngest({id: "interview-platform"});
 
@@ -26,6 +27,13 @@ const syncUser = inngest.createFunction(
 
             const created = await User.create(newUser);
             console.log("✅ User created:", created._id);
+            
+            await upsertStreamUser({
+                id:newUser.clerkId.toString(),
+                name: newUser.name,
+                image: newUser.profileImage,
+            });
+
         } catch (err) {
             console.error("❌ syncUser error:", err);
             throw err; // rethrow so Inngest registers the failure and you can see it in logs
@@ -45,6 +53,8 @@ const deleteUserFromDB = inngest.createFunction(
 
             const res = await User.deleteOne({clerkId: id});
             console.log("✅ deleteUserFromDB result:", res);
+
+            await deleteStreamUser(id.toString());
         } catch (err) {
             console.error("❌ deleteUserFromDB error:", err);
             throw err;
