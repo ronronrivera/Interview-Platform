@@ -53,7 +53,7 @@ export async function getActiveSessions(_, res){
     try {
         const sessions =  await Session.find({status: "active"}).populate("host", "name profileImage email clerkId").sort({createdAt: -1}).limit(20);
 
-        res.statis(200).json({sessions});
+        res.status(200).json({sessions});
 
     } catch (error) {
         console.log("Error in getActiveSession controller\n", error);
@@ -92,7 +92,7 @@ export async function getSessionById(req, res){
 
         const session = await Session.findById(id)
             .populate("host", "name email profileImage clerkId")
-            .populate("participants", "name email profileImage clerkId");
+            .populate("participant", "name email profileImage clerkId");
         
         if(!session) return res.status(404).json({message: "Session not found"});
         
@@ -112,17 +112,25 @@ export async function joinSession(req, res){
         const userId = req.user._id;
         const clerkId = req.user.clerkId;
 
-        const session = Session.findById(id);
+        const session = await Session.findById(id);
 
         if(!session) return res.status(404).json({message: "Session not found!"});
 
+        if(session.status !== "active"){
+            return res.status(400).json({message: "Cannot join a completed session!"});
+        }
+
+        if(session.host.toString() === userId.toString){
+            return res.status(400).json({message: "Host cannot join their own session as participants"});
+        }
+        
         //check if session is already full - has a participant
 
         if(session.participant) return res.status(404).json({message: "Session is full"});
 
         session.participant = userId;
 
-        await Session.save();
+        await session.save();
 
         const channel = chatClient.channel("messaging", session.callId);
         await channel.addMembers([clerkId]);
@@ -142,7 +150,7 @@ export async function endSession(req, res){
         const {id} = req.params;
         const userId = req.user._id;
 
-        const session = Session.findById(id);
+        const session = await Session.findById(id);
 
         if(!session) return res.status(404).json({message: "Session not found!"});
 
@@ -155,7 +163,7 @@ export async function endSession(req, res){
         //check if session is already completed
         
         if(session.status === "completed"){
-            res.status(400).json({message: "Session is already completed"});
+            return res.status(400).json({message: "Session is already completed"});
         }
         session.status = "completed";
          
