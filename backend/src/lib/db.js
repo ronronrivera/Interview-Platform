@@ -5,7 +5,7 @@ export const connectDB = async () => {
     try {
         if (mongoose.connection.readyState >= 1) {
             // already connected (1 = connected, 2 = connecting)
-            console.log("ℹ️ MongoDB already connected");
+            console.log(" MongoDB already connected");
             return;
         }
 
