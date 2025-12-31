@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router'
 import HomePage from './pages/HomePage'
-import ProblemsPage from './pages/ProblemsPage';
 import { useUser } from '@clerk/clerk-react';
 import { DashboardPage } from './pages/DashboardPage';
 import { Loader2 } from 'lucide-react';
+import { ProblemsPage } from './pages/ProblemsPage';
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
         <Routes>
             <Route path='/' element={!isSignedIn? <HomePage/> : <Navigate to={"/dashboard"}/>}/>
             <Route path='/dashboard' element={isSignedIn? <DashboardPage/> : <Navigate to={"/"}/>}/>
+            <Route path='/problems' element={isSignedIn? <ProblemsPage/> : <Navigate to={"/"}/>}/>
 
         </Routes>
     )

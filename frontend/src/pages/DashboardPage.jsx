@@ -1,8 +1,10 @@
+import Navbar from "../Components/Navbar"
 
 export const DashboardPage = () => {
     return (
         <div>
-            DasboardPage 
+            <Navbar/>
+            Dashboard
         </div>
     )
 }
