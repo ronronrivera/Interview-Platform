@@ -3,6 +3,9 @@ import { ArrowRightIcon, CheckIcon, Code2Icon, SparkleIcon, UsersIcon, VideoIcon
 import { Link } from 'react-router'
 
 function HomePage() {
+
+    document.title = "Gethired.io"
+
     return (
         <div className='bg-linear-to-br from-base-100 via-base-200 to-base-300'>
             {/*NAV BAR*/} 
