@@ -26,28 +26,25 @@ app.use(cors({
 }));
 app.use(clerkMiddleware()); // this add auth field to request object: req.auth();
 
+
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
 
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-if(!process.env.VERCEL){
+app.get("/{*any}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+});
 
-    const startServer = async () =>{
-        try {
-            if(!ENV.DB_URL){
-                throw new Error("DB_URL is not defined in environment variables")
-            }
-            console.log("\n\n") 
-            await connectDB();
-            app.listen(ENV.PORT, () =>{
-                console.log(`Server is running on PORT: ${ENV.PORT}\n\n`);
-            })
-        } catch (error) {
-            console.log("💣 Error connecting to the server: ", error);
-        }
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(ENV.PORT, () => console.log("Server is running on port:", ENV.PORT));
+    } catch (error) {
+        console.error("💥 Error starting the server", error);
     }
-    startServer();
-}
+};
 
-export default app;
+startServer();
+

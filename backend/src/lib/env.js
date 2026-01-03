@@ -9,5 +9,5 @@ export const ENV={
     STREAM_API_SECRET: process.env.STREAM_API_SECRET,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,
-    FRONT_END_URL: process.env.FRONT_END_URL
+    FRONT_END_URL: process.env.FRONT_END_URL,
 };
