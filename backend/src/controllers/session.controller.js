@@ -14,7 +14,7 @@ export async function createSession(req, res){
         const callId = `session_${Date.now()}_${Math.random().toString(36).substring(7)}`;
         
         //create session in db
-        const session = await Session.create({
+        const sessions = await Session.create({
             problem, 
             difficulty, 
             host: userId,
@@ -28,7 +28,7 @@ export async function createSession(req, res){
                 custom: {
                     problem,
                     difficulty,
-                    sessionId: session._id.toString()
+                    sessionId: sessions._id.toString()
                 }
             }
         });
@@ -41,7 +41,7 @@ export async function createSession(req, res){
         })
         await channel.create();
         
-        res.status(201).json({session});
+        res.status(201).json({sessions});
 
     } catch (error) {
         console.log("Error in createSession controller\n", error);
@@ -51,7 +51,10 @@ export async function createSession(req, res){
 
 export async function getActiveSessions(_, res){
     try {
-        const sessions =  await Session.find({status: "active"}).populate("host", "name profileImage email clerkId").sort({createdAt: -1}).limit(20);
+        const sessions =  await Session.find({status: "active"})
+            .populate("host", "name profileImage email clerkId")
+            .populate("participant", "name profileImage email clerkId")
+            .sort({createdAt: -1}).limit(20);
 
         res.status(200).json({sessions});
 

@@ -47,12 +47,6 @@ if(!process.env.VERCEL){
             console.log("💣 Error connecting to the server: ", error);
         }
     }
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-    app.get("/{*any}", (_, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-    });
-
     startServer();
 }
 

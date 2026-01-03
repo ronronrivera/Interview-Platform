@@ -3,9 +3,10 @@ import Navbar from "../Components/Navbar"
 import { PROBLEMS } from "../data/problem"
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
+import { useActiveSessions } from "../hooks/useSessions";
 
 export const ProblemsPage = () => {
-    
+
     document.title = "Problems";
 
     const problems = Object.values(PROBLEMS);
