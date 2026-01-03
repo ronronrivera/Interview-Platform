@@ -24,7 +24,10 @@ app.use(cors({
     origin: ENV.FRONT_END_URL,
     credentials: true
 }));
-app.use(clerkMiddleware()); // this add auth field to request object: req.auth();
+app.use(clerkMiddleware({
+        redirectToSignIn: false,
+    })
+); // this add auth field to request object: req.auth();
 
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.use("/api/chat", chatRoutes);

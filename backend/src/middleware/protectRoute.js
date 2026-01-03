@@ -1,8 +1,6 @@
-import { requireAuth } from "@clerk/express";
 import User from "../models/user.model.js";
 
 export const protectRoute = [
-  requireAuth(),
   async (req, res, next) => {
     try {
       const clerkId = req.auth().userId;
