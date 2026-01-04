@@ -6,6 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { ProblemsPage } from './pages/ProblemsPage';
 import ProblemPage from './pages/ProblemPage';
 import { Toaster } from 'react-hot-toast';
+import SessionPage from './pages/SessionPage';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                 <Route path='/dashboard' element={isSignedIn? <DashboardPage/> : <Navigate to={"/"}/>}/>
                 <Route path='/problems' element={isSignedIn? <ProblemsPage/> : <Navigate to={"/"}/>}/>
                 <Route path='/problem/:id' element={isSignedIn? <ProblemPage/> : <Navigate to={"/"}/>}/> 
+                <Route path='/session/:id' element={isSignedIn? <SessionPage/> : <Navigate to={"/"}/> }/>
             </Routes>
         </>
     )

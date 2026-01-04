@@ -31,10 +31,13 @@ app.use("/api/inngest", serve({client:inngest, functions}));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.get("/{*any}", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+// SPA fallback - send index.html for any unknown GET route (use regex to avoid path-to-regexp issues)
+app.get(/.*/, (req, res) => {
+  // Only respond with index.html for requests that accept HTML
+  if (!req.accepts || !req.accepts('html')) return res.status(404).end();
+  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
 });
 
 const startServer = async () => {

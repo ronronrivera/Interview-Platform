@@ -1,4 +1,5 @@
 export const getDifficultyBadgeClass = (difficulty) =>{
+    difficulty = String(difficulty);
     switch(difficulty.toLowerCase()){
         case "easy":
             return "badge-success";
