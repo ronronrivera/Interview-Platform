@@ -10,22 +10,22 @@ A live coding interview platform to host remote technical interviews with real-t
 ---
 
 ---
-** LADING PAGE **
+**LADING PAGE**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4d2b934a-e717-4e91-be66-b18307c20532" />
 
-** SIGN-IN/SIGN-UP MODAL BY CLERK
+**SIGN-IN/SIGN-UP MODAL BY CLERK**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/170f8dd3-0d00-4c00-9522-70fbc9908079" />
 
-** DASHBOARD ** 
+**DASHBOARD** 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/edd31ca1-504c-49d6-8302-ad9829ddbe84" />
 
-** ACCOUNT DETAILS BY CLERK ** 
+**ACCOUNT DETAILS BY CLERK** 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/eb45bc53-3726-41fa-a69b-383896d47a7d" />
 
-** PRACTICE PROBLEM ** 
+**PRACTICE PROBLEM** 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/195122ea-bf35-4014-a661-488710d7efc0" />
 
-** SESSION DASHBOARD **
+**SESSION DASHBOARD**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df631604-cc52-4a64-bc70-bd6c0074ee0c" />
 
 ---
