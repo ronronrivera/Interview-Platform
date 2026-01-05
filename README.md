@@ -4,7 +4,7 @@ A live coding interview platform to host remote technical interviews with real-t
 
 ---
 
-📌 **Demo:** [https://your-demo-url.example.com  ](https://gethired-io.onrender.com/)
+📌 **Demo:** [https://gethired-io.onrender.com/](https://gethired-io.onrender.com/)
 
 
 ---
