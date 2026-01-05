@@ -30,8 +30,6 @@ I built this project to make it easy to run remote technical interviews and prac
 - Backend: Node.js, Express, Inngest, Mongoose
 - Database: MongoDB Atlas
 - Realtime & Video: Stream (video + chat via @stream-io/node-sdk and stream-chat)
-- Code execution: Piston (https://emkc.org/api/v2/piston)
-- Authentication: Clerk
 
 ---
 
@@ -112,16 +110,11 @@ Example (place an image file named `screenshot.png` at the repo root):
 
 ---
 
-## Notes & TODOs ✅
-- Replace the demo URL at the top with the live URL once deployed.
-- Remove or rotate any scoped credentials from `.env` files before publishing the repo.
 
----
-
-## Contributing
-PRs and issues are welcome. If you add new env vars or services, please update this README.
 
 ---
 
 ## License
-MIT (update as needed)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Tech](https://img.shields.io/badge/MERN-stack-blue)
