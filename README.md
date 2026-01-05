@@ -99,20 +99,6 @@ Open the frontend app at the Vite URL (usually http://localhost:5173) and ensure
 
 ---
 
-## Where to Put Your Image 📷
-Add a screenshot so visitors can quickly see the app design. Place the image at the repository root (or `frontend/public`) and update the README image reference below.
-
-Example (place an image file named `screenshot.png` at the repo root):
-
-```md
-![App screenshot](./screenshot.png)
-```
-
----
-
-
-
----
 
 ## License
 ![License](https://img.shields.io/badge/license-MIT-blue)
